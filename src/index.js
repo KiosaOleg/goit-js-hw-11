@@ -61,6 +61,7 @@ async function fetnchArticles() {
     createGalleryMarkup(hits);
     if (hits.length < pixabayApiService.per_page) {
       loadMoreBtn.refs.button.hidden = true;
+      Notify.info("We're sorry, but youve reached the end of search results.");
     }
     console.log(hits);
   } catch (error) {
