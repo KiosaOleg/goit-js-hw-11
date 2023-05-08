@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const API_KEY = '29995763-d0c8565eeb7c62036a35192df';
 const BASE_URL = 'https://pixabay.com/api';
@@ -31,6 +32,7 @@ export default class PixabayApiService {
       });
 
       const { hits, totalHits } = response.data;
+      this.incrementPage();
       if (!hits.length) {
         Notify.failure('Sorry. Please try again.');
         return [];

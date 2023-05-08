@@ -1,5 +1,6 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 import PixabayApiService from './js/pixabay-service';
 import LoadMoreBtn from './js/load-more-btn';
@@ -49,15 +50,25 @@ function onSearch(event) {
 }
 
 async function fetnchArticles() {
+  Loading.standard('Loading...');
   loadMoreBtn.disable();
   try {
-    const hits = await pixabayApiService.fetchArticles();
+    const hits = await pixabayApiService.fetchArticles(
+      pixabayApiService.query,
+      pixabayApiService.page,
+      pixabayApiService.per_page
+    );
     createGalleryMarkup(hits);
+    if (hits.length < pixabayApiService.per_page) {
+      loadMoreBtn.refs.button.hidden = true;
+    }
+    console.log(hits);
   } catch (error) {
     console.error(error);
     Notify.failure('Unable to fetch articles. Please try again.');
   }
   loadMoreBtn.enable();
+  Loading.remove();
 }
 
 function createGalleryMarkup(images) {
