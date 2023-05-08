@@ -48,12 +48,16 @@ function onSearch(event) {
   }
 }
 
-function fetnchArticles() {
+async function fetnchArticles() {
   loadMoreBtn.disable();
-  pixabayApiService.fetchArticles().then(hits => {
+  try {
+    const hits = await pixabayApiService.fetchArticles();
     createGalleryMarkup(hits);
-    loadMoreBtn.enable();
-  });
+  } catch (error) {
+    console.error(error);
+    Notify.failure('Unable to fetch articles. Please try again.');
+  }
+  loadMoreBtn.enable();
 }
 
 function createGalleryMarkup(images) {
