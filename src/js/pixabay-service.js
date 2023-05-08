@@ -2,10 +2,10 @@ import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const API_KEY = '29995763-d0c8565eeb7c62036a35192df';
-const BASE_URL = 'https://pixabay.com/api';
+const BASE_URL = `https://pixabay.com/api/`;
 
 const instance = axios.create({
-  baseURL: BASE_URL,
+  // baseURL: BASE_URL,
   params: {
     key: API_KEY,
     image_type: 'photo',
@@ -23,7 +23,7 @@ export default class PixabayApiService {
 
   async fetchArticles(searchQuery, page, per_page) {
     try {
-      const response = await instance.get('', {
+      const response = await instance.get('https://pixabay.com/api/', {
         params: {
           q: searchQuery,
           page,
