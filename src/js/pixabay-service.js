@@ -42,7 +42,7 @@ export default class PixabayApiService {
       return hits;
     } catch (error) {
       console.error(error);
-      throw new Error('Unable to fetch articles.');
+      throw new Error('Unable to fetch articles .');
     }
   }
 
