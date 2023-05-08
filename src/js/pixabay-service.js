@@ -33,11 +33,11 @@ export default class PixabayApiService {
 
       const { hits, totalHits } = response.data;
       this.incrementPage();
-      if (!hits.length) {
-        Notify.failure('Sorry. Please try again.');
-        return [];
-      }
-      console.log(hits);
+      // if (!hits.length) {
+      //   Notify.failure('Sorry. Please try again.');
+      //   return [];
+      // }
+      // console.log(hits);
 
       return hits;
     } catch (error) {

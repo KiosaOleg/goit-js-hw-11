@@ -59,7 +59,7 @@ async function fetnchArticles() {
       pixabayApiService.per_page
     );
     createGalleryMarkup(hits);
-    if (hits.length < pixabayApiService.per_page) {
+    if (!hits.length) {
       loadMoreBtn.refs.button.hidden = true;
       Notify.info("We're sorry, but youve reached the end of search results.");
     }
